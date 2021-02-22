@@ -1,0 +1,79 @@
+
+<style type="text/css">
+    .container {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px 35px;
+        color: #2e2f32;
+    }
+</style>
+<body>
+    <div class="container">
+          <form method="GET" action="#">
+            <div class="phone-input">
+              <h2>Welcome to Sumra Chat</h2>
+              <p>Please Login or Sign Up</p>
+              <div class="icons">
+                <p>Sign up with</p>
+              </div>
+              <input
+               type="tel"
+               id="phone_number"
+               placeholder="Your phone number"
+             />
+            </div>
+            <hr style="visibility: hidden;">
+            <div>
+            <input
+               type="text"
+               id="device_id"
+               placeholder="device id"
+             />
+          </div>
+          <hr style="visibility: hidden;">
+          <div>
+            <input
+               type="submit"
+               id="btn"
+               value="Next >"
+               onclick="registerPhone()"
+              />
+          </div>
+          </form>
+        </div>
+    </body>
+    <script>
+const numberInput = document.getElementById('phone_number');
+const deviceIdInput = document.getElementById('device_id');
+
+function registerPhone(){
+  const phone_number = numberInput.value;
+  const device_id = deviceIdInput.value;
+      fetch('https://api.sumra.net/auth/v1/send-code', {
+        method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            phone_number: phone_number,
+            device_id: device_id
+            })
+          }).then(function(res){
+          console.log(res);
+          window.location.href="Register.html";
+          return true;
+      })
+      .catch(function(err){
+          console.log(err);
+  });
+}
+    </script>
+    

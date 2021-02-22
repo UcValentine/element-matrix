@@ -1,0 +1,93 @@
+
+<style type="text/css">
+    .container {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px 35px;
+        color: #2e2f32;
+    }
+    .form-group{
+        padding-top: 10px;
+    }
+</style>
+<body>
+    <div class="container">
+          <form method="GET" action="Login.html">
+              <div>
+                <h2>Register Page</h2>
+                <div>
+                  <input
+                   type="text"
+                   id="code"
+                   placeholder="Enter code"
+                   pattern="[a-zA-Z0-9]+"
+                 />
+                </div>
+                 <hr style="visibility: hidden;">
+                 <div>
+                  <input
+                  type="text"
+                  id="username"
+                  placeholder="Enter Username"
+                />
+                 </div>
+                 <div>
+                  <input
+                  type="text"
+                  id="password"
+                  placeholder="Enter password"
+                  hidden
+                />
+                 </div>
+                 <hr style="visibility: hidden;">
+                 <div>
+                  <input
+                  type="submit"
+                  id="signUp-btn"
+                  onclick="register()"
+                  value="Sign Up"
+                />
+                 </div>
+              </div>
+          </form>
+        </div>
+    </body>
+    <script>
+const codeInput = document.getElementById('code');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+
+function register(){
+  const code = codeInput.value;
+  const username =usernameInput.value;
+  const password = passwordInput.value;
+      fetch('https://api.sumra.net/auth/v1/registration', {
+        method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              code: code,
+              username: username,
+              password: password
+            })
+          }).then(function(res){
+          console.log(res);
+          window.location.href="Login.html";
+          return true;
+      })
+      .catch(function(err){
+          console.log(err);
+  });
+}
+    </script>
+    
+    

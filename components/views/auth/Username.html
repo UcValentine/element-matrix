@@ -1,0 +1,65 @@
+<style type="text/css">
+    .container {
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        text-align: center;
+        padding: 25px 35px;
+        color: #2e2f32;
+    }
+
+    .form-group{
+        padding-top: 10px;
+    }
+</style>
+<body>
+    <div class="container">
+          <form>
+            <div class="phone-input">
+              <h2>Enter Username</h2>
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter Username"
+                />
+            </div>
+            <div class="form-group">
+              <input
+                type="submit"
+                id="signUp-btn"
+                onclick="usernameValidate()"
+                value="Submit"/>
+            </div>
+          </form>
+        </div>
+    </body>
+    <script>
+const usernameInput = document.getElementById('username');
+
+function usernameValidate(){
+  const username = usernameInput.value;
+      fetch('https://api.sumra.net/api/validate', {
+        method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: username
+            })
+          }).then(function(res){
+          console.log(res);
+          window.location.href="#";
+          return true;
+      })
+      .catch(function(err){
+          console.log(err);
+  });
+}
+    </script>
+    
